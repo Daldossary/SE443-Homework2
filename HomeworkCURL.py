@@ -41,6 +41,14 @@ respList.append(req.post(postLogin, json = invalidUser))
 #Adding a response that is purely numerical
 respList.append(4423177.88)
 
+#Ask user to enter their own API request for GET
+getRequest = input("Enter GET URL: ")
+respList.append(req.get(getRequest))
+
+#Ask user to enter their own API request for POST (register):
+registerJSON = input("Enter registration JSON for POST request: ").json()
+respList.append(req.post(postRegister, json = registerJSON))
+
 #Checking if responses are valid
 for i in range(len(respList)):
     if not isinstance(respList[i], req.models.Response):
