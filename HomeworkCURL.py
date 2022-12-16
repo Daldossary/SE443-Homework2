@@ -38,11 +38,18 @@ respList.append(req.post(postRegister, json = newUser))
 respList.append(req.post(postLogin, json = existingUser))
 respList.append(req.post(postLogin, json = invalidUser))
 
+#Adding a response that is purely numerical
+respList.append(4423177.88)
+
 #Checking if responses are valid
 for i in range(len(respList)):
-    if respList[i].status_code == 200:
-        print("\nRESPONSE VALID, JSON RETRIEVED: \n", respList[i].json())
-    elif respList[i].status_code == 400:
-        print("\nRESPONSE INVALID: BAD REQUEST, ERROR: \n", respList[i].json())
-    elif respList[i].status_code == 404:
-        print("\nRESPONSE INVALID: NOT FOUND, ERROR: \n", respList[i].json())
+    if not isinstance(respList[i], req.models.Response):
+        print("\nINVALID RESPONSE: NOT STRING\n")
+    else: 
+        if respList[i].status_code == 200:
+            print("\nRESPONSE VALID, JSON RETRIEVED: \n", respList[i].json())
+        elif respList[i].status_code == 400:
+            print("\nRESPONSE INVALID: BAD REQUEST, ERROR: \n", respList[i].json())
+        elif respList[i].status_code == 404:
+            print("\nRESPONSE INVALID: NO RESPONSE, ERROR: \n", respList[i].json())
+        
